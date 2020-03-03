@@ -1,7 +1,11 @@
 ﻿#pragma rtGlobals=3		// Use modern global access method and strict wave access.
-#pragma version = 1.01
+#pragma version = 1.02
 
 //	2020 Hyungu Kang, hyunguboy@gmail.com
+//
+//	Version 1.02 (Released 2020-03-04)
+//	1.	Fixes minor bugs from previous version.
+//	2.	Plot and table can be killed without a dialog.
 //
 //	Version 1.01 (Released 2020-03-03)
 //	1.	Changed formatting for better legibility.
@@ -9,6 +13,7 @@
 //	3.	Outputs standard deviation wave (from wavestats) as well.
 //	4.	Plots time series for quick comparison.
 //	5.	Added diagnostic messages to be printed on the command line.
+//	6.	Changed loop behavior so it runs faster.
 //
 //	Version 1.00 (Released 2020-01-16)
 //	1.	Works in Igor Pro 6.37.
@@ -38,6 +43,7 @@ Function Avg_MatchToTime(w_meas, w_meas_time, w_matched_time)
 
 			Duplicate w_meas_time, w_meas_time_sorted
 			Duplicate w_meas, w_meas_sorted
+			SetScale d, 0, 1, "dat", w_meas_time_sorted
 
 			Sort w_meas_time, w_meas_time_sorted, w_meas_sorted
 
@@ -55,6 +61,7 @@ Function Avg_MatchToTime(w_meas, w_meas_time, w_matched_time)
 			Print nameofwave(w_matched_time) + " is not sorted. Making sorted wave."
 
 			Duplicate w_matched_time, w_matched_time_sorted
+			SetScale d, 0, 1, "dat", w_matched_time_sorted
 
 			Sort w_matched_time, w_matched_time_sorted
 
@@ -114,15 +121,22 @@ Function Avg_MatchToTime(w_meas, w_meas_time, w_matched_time)
 	EndFor
 
 	//	Dessert: Kill useless variables and waves and make comparison plot.
-	KillVariables/Z 
+	KillVariables/Z V_npnts, V_numNaNs, V_numINFs, V_avg, V_Sum, V_sdev
+	KillVariables/Z V_sem, V_rms, V_adev, V_skew, V_kurt, V_minloc, V_maxloc
+	KillVariables/Z V_min, V_max, V_minRowLoc, V_maxRowLoc, V_startRow, V_endRow
 	KillWaves/Z w_temporary_bin
 	
-	Edit w_timeMatchTo, w_meas_avg, w_meas_stdev
+	Edit/K = 1 w_timeMatchTo, w_meas_avg, w_meas_stdev
 
-	Display  w_meas_avg vs w_timeMatchTo
-	ModifyGraph mode = 3, marker = 19, gaps =0;DelayUpdate
+	Display/K = 1 w_meas_avg vs w_timeMatchTo
+	ModifyGraph mode(w_meas_avg) = 3;DelayUpdate
+	ModifyGraph marker(w_meas_avg) = 19;DelayUpdate
+	ModifyGraph gaps(w_meas_avg) = 0;DelayUpdate
 	ErrorBars w_meas_avg Y, wave = (w_meas_stdev,w_meas_stdev);DelayUpdate
-	AppendToGraph w_meas vs w_meas_time;DelayUpdate
-	ModifyGraph mode(w_meas) = 4, gaps(w_meas) = 0,rgb(w_meas)=(0,0,0);DelayUpdate
+	AppendToGraph $nameofwave(w_measToMatch) vs w_timeToMatch
+	ModifyGraph mode($nameofwave(w_measToMatch)) = 0;DelayUpdate
+	ModifyGraph gaps($nameofwave(w_measToMatch)) = 0;DelayUpdate
+	ModifyGraph rgb($nameofwave(w_measToMatch)) = (0,0,0);DelayUpdate
+	Legend/C/N = text0/A = MC;DelayUpdate
 	
 End
