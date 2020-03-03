@@ -120,7 +120,7 @@ Function Avg_MatchToTime(w_meas, w_meas_time, w_matched_time)
 		EndIf
 	EndFor
 
-	//	Dessert: Kill useless variables and waves and make comparison plot.
+	// Dessert: Kill useless variables and waves and make comparison plot.
 	KillVariables/Z V_npnts, V_numNaNs, V_numINFs, V_avg, V_Sum, V_sdev
 	KillVariables/Z V_sem, V_rms, V_adev, V_skew, V_kurt, V_minloc, V_maxloc
 	KillVariables/Z V_min, V_max, V_minRowLoc, V_maxRowLoc, V_startRow, V_endRow
@@ -130,8 +130,8 @@ Function Avg_MatchToTime(w_meas, w_meas_time, w_matched_time)
 
 	Display/K = 1 w_meas_avg vs w_timeMatchTo
 	ModifyGraph mode(w_meas_avg) = 3;DelayUpdate
-	ModifyGraph marker(w_meas_avg) = 19;DelayUpdate
 	ModifyGraph gaps(w_meas_avg) = 0;DelayUpdate
+	ModifyGraph marker(w_meas_avg) = 19;DelayUpdate
 	ErrorBars w_meas_avg Y, wave = (w_meas_stdev,w_meas_stdev);DelayUpdate
 	AppendToGraph $nameofwave(w_measToMatch) vs w_timeToMatch
 	ModifyGraph mode($nameofwave(w_measToMatch)) = 0;DelayUpdate
