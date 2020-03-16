@@ -1,7 +1,10 @@
 ﻿#pragma rtGlobals=3		// Use modern global access method and strict wave access.
-#pragma version = 1.02
+#pragma version = 1.03
 
 //	2020 Hyungu Kang, hyunguboy@gmail.com
+//
+//	Version 1.03 (Released 2020-03-16)
+//	1.	Minor syntax corrections.
 //
 //	Version 1.02 (Released 2020-03-04)
 //	1.	Fixes minor bugs from previous version.
@@ -31,8 +34,8 @@ Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 
 	Variable iloop, jloop
 
-	Make/O/D/N = (numpnts(w_matched_time)) w_meas_avg = NaN
-	Make/O/D/N = (numpnts(w_matched_time)) w_meas_stdev = NaN
+	Make/O/D/N=(numpnts(w_matched_time)) w_meas_avg = NaN
+	Make/O/D/N=(numpnts(w_matched_time)) w_meas_stdev = NaN
 
 	// Check if measured time wave is sorted.
 	iloop = 1
@@ -94,11 +97,11 @@ Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 	jloop = 0
 
 	For(iloop = 1; iloop < numpnts(w_timeMatchTo); iloop += 1)
-		Make/O/D/N = 0 w_temporary_bin
+		Make/O/D/N=0 w_temporary_bin
 
 		For(jloop = jloop; jloop < numpnts(w_timeToMatch); jloop += 1)
 			If(w_timeToMatch[jloop] > w_timeMatchTo[iloop - 1] && w_timeToMatch[jloop] <= w_timeMatchTo[iloop])
-				InsertPoints/M = 0 0, 1, w_temporary_bin
+				InsertPoints/M=0 0, 1, w_temporary_bin
 				w_temporary_bin[0] = w_measToMatch[jloop]
 			EndIf
 			
@@ -126,9 +129,9 @@ Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 	KillVariables/Z V_min, V_max, V_minRowLoc, V_maxRowLoc, V_startRow, V_endRow
 	KillWaves/Z w_temporary_bin
 	
-	Edit/K = 1 w_timeMatchTo, w_meas_avg, w_meas_stdev
+	Edit/K=1 w_timeMatchTo, w_meas_avg, w_meas_stdev
 
-	Display/K = 1 w_meas_avg vs w_timeMatchTo
+	Display/K=1 w_meas_avg vs w_timeMatchTo
 	ModifyGraph mode(w_meas_avg) = 3;DelayUpdate
 	ModifyGraph gaps(w_meas_avg) = 0;DelayUpdate
 	ModifyGraph rgb(w_meas_avg) = (65535,0,0);DelayUpdate
@@ -139,6 +142,6 @@ Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 	ModifyGraph gaps($nameofwave(w_measToMatch)) = 0;DelayUpdate
 	ModifyGraph rgb($nameofwave(w_measToMatch)) = (0,0,0);DelayUpdate
 	ModifyGraph marker($nameofwave(w_measToMatch)) = 0;DelayUpdate
-	Legend/C/N = text0/A = MC;DelayUpdate
+	Legend/C/N=text0/A=MC;DelayUpdate
 	
 End
