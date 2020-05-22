@@ -1,16 +1,21 @@
 ﻿#pragma rtGlobals=3		// Use modern global access method and strict wave access.
-#pragma version = 1.03
+#pragma version = 1.4
 
-//	2020 Hyungu Kang, hyunguboy@gmail.com
+//	2020 Hyungu Kang, www.hazykinetics.com, hyunguboy@gmail.com
 //
-//	Version 1.03 (Released 2020-03-16)
+//	GNU GPLv3. Please feel free to modify the code as necessary for your needs.
+//
+//	Version 1.4 (Released 2020-05-22)
+//	1.	Minor formatting and comment changes.
+//
+//	Version 1.3 (Released 2020-03-16)
 //	1.	Minor syntax corrections.
 //
-//	Version 1.02 (Released 2020-03-04)
+//	Version 1.2 (Released 2020-03-04)
 //	1.	Fixes minor bugs from previous version.
 //	2.	Plot and table can be killed without a dialog.
 //
-//	Version 1.01 (Released 2020-03-03)
+//	Version 1.1 (Released 2020-03-03)
 //	1.	Changed formatting for better legibility.
 //	2.	Sorts time series if needed.
 //	3.	Outputs standard deviation wave (from wavestats) as well.
@@ -18,18 +23,21 @@
 //	5.	Added diagnostic messages to be printed on the command line.
 //	6.	Changed loop behavior so it runs faster.
 //
-//	Version 1.00 (Released 2020-01-16)
-//	1.	Works in Igor Pro 6.37.
+//	Version 1.0 (Released 2020-01-16)
+//	1.	Initial release tested with Igor Pro 6.37 and 8.04.
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//	This function will take a wave with its corresponding time wave and average
-//	points to match the length of a shorter time wave by averaging.
-//
+//	HKang_AvgMatchToTime: Takes a measurement wave with its corresponding
+//	time wave and averages the measurement points to match the length of a
+//	shorter time wave by averaging.
+
+////////////////////////////////////////////////////////////////////////////////
+
 //	w_meas: Wave of values to be averaged.
 //	w_meas_time: Corresponding time wave to w_meas.
 //	w_matched_time: Time wave to be matched to.
-Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
+Function HKang_AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 	Wave w_meas, w_meas_time, w_matched_time
 
 	Variable iloop, jloop
@@ -37,7 +45,7 @@ Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 	Make/O/D/N=(numpnts(w_matched_time)) w_meas_avg = NaN
 	Make/O/D/N=(numpnts(w_matched_time)) w_meas_stdev = NaN
 
-	// Check if measured time wave is sorted.
+	// Check if measured time wave is sorted. Make sorted wave if not sorted.
 	iloop = 1
 
 	Do
@@ -56,7 +64,7 @@ Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 		iloop += 1
 	While(iloop < numpnts(w_meas_time))
 
-	// Check if time bin wave is sorted.
+	// Check if matched time wave is sorted. Make sorted wave if not sorted.
 	iloop = 1
 
 	Do
@@ -74,7 +82,7 @@ Function AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 		iloop += 1
 	While(iloop < numpnts(w_matched_time))
 
-	// In case if time wave(s) is(are) not sorted.
+	// In case if time wave(s) is(are) already sorted.
 	If(waveexists(w_meas_time_sorted))
 		Wave w_timeToMatch = w_meas_time_sorted
 		Wave w_measToMatch = w_meas_sorted
