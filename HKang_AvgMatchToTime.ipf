@@ -1,9 +1,12 @@
 ﻿#pragma rtGlobals=3		// Use modern global access method and strict wave access.
-#pragma version = 1.4
+#pragma version = 1.5
 
 //	2020 Hyungu Kang, www.hazykinetics.com, hyunguboy@gmail.com
 //
 //	GNU GPLv3. Please feel free to modify the code as necessary for your needs.
+//
+//	Version 1.5 (Released 2020-05-24)
+//	1.	Minor formatting and comment changes.
 //
 //	Version 1.4 (Released 2020-05-22)
 //	1.	Minor formatting and comment changes.
@@ -101,7 +104,7 @@ Function HKang_AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 		Print nameofwave(w_matched_time) + " is sorted. Using this wave."
 	EndIf
 
-	// Main course: Match to time with bin wave.
+	// Match to time with bin wave.
 	jloop = 0
 
 	For(iloop = 1; iloop < numpnts(w_timeMatchTo); iloop += 1)
@@ -112,7 +115,7 @@ Function HKang_AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 				InsertPoints/M=0 0, 1, w_temporary_bin
 				w_temporary_bin[0] = w_measToMatch[jloop]
 			EndIf
-			
+
 			// Break condition to move to the next time bin.
 			If(w_timeToMatch[jloop] >= w_timeMatchTo[iloop])
 				jloop += 1
@@ -121,6 +124,7 @@ Function HKang_AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 			EndIf
 		EndFor
 
+		// Average values in bin wave and save in w_meas_avg.
 		If(numpnts(w_temporary_bin) == 0)
 			w_meas_avg[iloop] = NaN
 			w_meas_stdev[iloop] = NaN
@@ -131,25 +135,27 @@ Function HKang_AvgMatchToTime(w_meas, w_meas_time, w_matched_time)
 		EndIf
 	EndFor
 
-	// Dessert: Kill useless variables and waves and make comparison plot.
+	// Kill useless variables and waves and make comparison plot.
 	KillVariables/Z V_npnts, V_numNaNs, V_numINFs, V_avg, V_Sum, V_sdev
 	KillVariables/Z V_sem, V_rms, V_adev, V_skew, V_kurt, V_minloc, V_maxloc
 	KillVariables/Z V_min, V_max, V_minRowLoc, V_maxRowLoc, V_startRow, V_endRow
 	KillWaves/Z w_temporary_bin
-	
+
+	// Table for quick look.
 	Edit/K=1 w_timeMatchTo, w_meas_avg, w_meas_stdev
 
+	// Display times series.
 	Display/K=1 w_meas_avg vs w_timeMatchTo
-	ModifyGraph mode(w_meas_avg) = 3;DelayUpdate
-	ModifyGraph gaps(w_meas_avg) = 0;DelayUpdate
-	ModifyGraph rgb(w_meas_avg) = (65535,0,0);DelayUpdate
-	ModifyGraph marker(w_meas_avg) = 19;DelayUpdate
-	ErrorBars w_meas_avg Y, wave = (w_meas_stdev,w_meas_stdev);DelayUpdate
+	ModifyGraph mode(w_meas_avg) = 3; DelayUpdate
+	ModifyGraph gaps(w_meas_avg) = 0; DelayUpdate
+	ModifyGraph rgb(w_meas_avg) = (65535,0,0); DelayUpdate
+	ModifyGraph marker(w_meas_avg) = 19; DelayUpdate
+	ErrorBars w_meas_avg Y, wave = (w_meas_stdev,w_meas_stdev); DelayUpdate
 	AppendToGraph $nameofwave(w_measToMatch) vs w_timeToMatch
-	ModifyGraph mode($nameofwave(w_measToMatch)) = 0;DelayUpdate
-	ModifyGraph gaps($nameofwave(w_measToMatch)) = 0;DelayUpdate
-	ModifyGraph rgb($nameofwave(w_measToMatch)) = (0,0,0);DelayUpdate
-	ModifyGraph marker($nameofwave(w_measToMatch)) = 0;DelayUpdate
-	Legend/C/N=text0/A=MC;DelayUpdate
-	
+	ModifyGraph mode($nameofwave(w_measToMatch)) = 0; DelayUpdate
+	ModifyGraph gaps($nameofwave(w_measToMatch)) = 0; DelayUpdate
+	ModifyGraph rgb($nameofwave(w_measToMatch)) = (0,0,0); DelayUpdate
+	ModifyGraph marker($nameofwave(w_measToMatch)) = 0; DelayUpdate
+	Legend/C/N=text0/A=MC; DelayUpdate
+
 End
