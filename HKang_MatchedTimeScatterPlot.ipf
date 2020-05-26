@@ -1,9 +1,12 @@
 ﻿#pragma rtGlobals=3		// Use modern global access method and strict wave access.
-#pragma version = 1.0
+#pragma version = 1.1
 
 //	2020 Hyungu Kang, www.hazykinetics.com, hyunguboy@gmail.com
 //
 //	GNU GPLv3. Please feel free to modify the code as necessary for your needs.
+//
+//	Version 1.1 (Released 2020-05-26)
+//	1.	Fixed bug in the if conditions (mix up between iloop and V_value).
 //
 //	Version 1.0 (Released 2020-05-24)
 //	1.	Initial release tested with Igor Pro 6.37 and 8.04.
@@ -54,7 +57,7 @@ Function HKang_MatchedTimeScatterPlot(w_measTimeY, w_measY, w_measTimeX, w_measX
 			FindValue/V=(w_measTimeY[iloop]) w_measTimeX
 
 			// If the y-axis time point exists in the x-axis time wave.
-			If(V_value != -1 && numtype(w_measY[iloop]) == 0 && numtype(w_measX[iloop]) == 0)
+			If(V_value != -1 && numtype(w_measY[iloop]) == 0 && numtype(w_measX[V_value]) == 0)
 				InsertPoints/M=0 numpnts(w_measTime_matched), 1, w_measTime_matched
 				InsertPoints/M=0 numpnts(w_measY_matched), 1, w_measY_matched
 				InsertPoints/M=0 numpnts(w_measX_matched), 1, w_measX_matched
@@ -69,7 +72,7 @@ Function HKang_MatchedTimeScatterPlot(w_measTimeY, w_measY, w_measTimeX, w_measX
 			FindValue/V=(w_measTimeX[iloop]) w_measTimeY
 
 			// If the y-axis time point exists in the x-axis time wave.
-			If(V_value != -1 && numtype(w_measY[iloop]) == 0 && numtype(w_measX[iloop]) == 0)
+			If(V_value != -1 && numtype(w_measY[V_value]) == 0 && numtype(w_measX[iloop]) == 0)
 				InsertPoints/M=0 numpnts(w_measTime_matched), 1, w_measTime_matched
 				InsertPoints/M=0 numpnts(w_measY_matched), 1, w_measY_matched
 				InsertPoints/M=0 numpnts(w_measX_matched), 1, w_measX_matched
