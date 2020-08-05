@@ -1,14 +1,18 @@
 ﻿#pragma rtGlobals=3		// Use modern global access method and strict wave access.
-#Pragma version = 1.00
+#Pragma version = 1.1
 
 //	2020 Hyungu Kang, www.hazykinetics.com, hyunguboy@gmail.com
+//
+//	Version 1.1 (Released 2020-06-30)
+//	1.	Added z-axis color scales for to clarify the 
+//	2.	Changed code formatting for consistency.
 //
 //	Version 1.0 (Released 2020-01-31)
 //	1.	Initial release tested with Igor Pro 6.37 and 8.04.
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//	Take time and concentration wave and create diurnal plots on an
+//	Takes time and concentration waves and creates diurnal plots on an
 //	hourly basis.
 //	
 //	
@@ -18,30 +22,124 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Function HKang_DisplayDiurnalPlot()
+Function HKang_DisplayDiurnalPlot(w_conc, w_time)
+	Wave w_conc, w_time
 
+	Variable iloop
+	String str_waveTemp0, str_waveTemp1
 
+	DFREF dfr_current = getdatafolderDFR()
 
+	// Make new data folder to store these waves.
+	NewDataFolder/O/S root:Diurnal
 
+	HKang_GetHourlyWaves(w_conc, w_time)
+	HKang_GetHourlyStats()
 
+	Wave w_DiurnalBinCenters = root:Diurnal:w_DiurnalBinCenters
+	Wave w_DiurnalMean = root:Diurnal:w_DiurnalMean
+	Wave w_DiurnalStdDev = root:Diurnal:w_DiurnalStdDev
+	Wave w_DiurnalMedian = root:Diurnal:w_DiurnalMedian
+	Wave w_Diurnal90p = root:Diurnal:w_Diurnal90p
+	Wave w_Diurnal75p = root:Diurnal:w_Diurnal75p
+	Wave w_Diurnal25p = root:Diurnal:w_Diurnal25p
+	Wave w_Diurnal10p = root:Diurnal:w_Diurnal10p
+
+	Wave w_DiurnalBin1_1090 = root:Diurnal:w_DiurnalBin1_1090
+	Wave w_DiurnalBin2_1090 = root:Diurnal:w_DiurnalBin2_1090
+	Wave w_DiurnalBin3_1090 = root:Diurnal:w_DiurnalBin3_1090
+	Wave w_DiurnalBin4_1090 = root:Diurnal:w_DiurnalBin4_1090
+	Wave w_DiurnalBin5_1090 = root:Diurnal:w_DiurnalBin5_1090
+	Wave w_DiurnalBin6_1090 = root:Diurnal:w_DiurnalBin6_1090
+	Wave w_DiurnalBin7_1090 = root:Diurnal:w_DiurnalBin7_1090
+	Wave w_DiurnalBin8_1090 = root:Diurnal:w_DiurnalBin8_1090
+	Wave w_DiurnalBin9_1090 = root:Diurnal:w_DiurnalBin9_1090
+	Wave w_DiurnalBin10_1090 = root:Diurnal:w_DiurnalBin10_1090
+	Wave w_DiurnalBin11_1090 = root:Diurnal:w_DiurnalBin11_1090
+	Wave w_DiurnalBin12_1090 = root:Diurnal:w_DiurnalBin12_1090
+	Wave w_DiurnalBin13_1090 = root:Diurnal:w_DiurnalBin13_1090
+	Wave w_DiurnalBin14_1090 = root:Diurnal:w_DiurnalBin14_1090
+	Wave w_DiurnalBin15_1090 = root:Diurnal:w_DiurnalBin15_1090
+	Wave w_DiurnalBin16_1090 = root:Diurnal:w_DiurnalBin16_1090
+	Wave w_DiurnalBin17_1090 = root:Diurnal:w_DiurnalBin17_1090
+	Wave w_DiurnalBin18_1090 = root:Diurnal:w_DiurnalBin18_1090
+	Wave w_DiurnalBin19_1090 = root:Diurnal:w_DiurnalBin19_1090
+	Wave w_DiurnalBin20_1090 = root:Diurnal:w_DiurnalBin20_1090
+	Wave w_DiurnalBin21_1090 = root:Diurnal:w_DiurnalBin21_1090
+	Wave w_DiurnalBin22_1090 = root:Diurnal:w_DiurnalBin22_1090
+	Wave w_DiurnalBin23_1090 = root:Diurnal:w_DiurnalBin23_1090
+	Wave w_DiurnalBin24_1090 = root:Diurnal:w_DiurnalBin24_1090
+
+	Wave w_DiurnalBin1_xaxis = root:Diurnal:w_DiurnalBin1_xaxis
+	Wave w_DiurnalBin2_xaxis = root:Diurnal:w_DiurnalBin2_xaxis
+	Wave w_DiurnalBin3_xaxis = root:Diurnal:w_DiurnalBin3_xaxis
+	Wave w_DiurnalBin4_xaxis = root:Diurnal:w_DiurnalBin4_xaxis
+	Wave w_DiurnalBin5_xaxis = root:Diurnal:w_DiurnalBin5_xaxis
+	Wave w_DiurnalBin6_xaxis = root:Diurnal:w_DiurnalBin6_xaxis
+	Wave w_DiurnalBin7_xaxis = root:Diurnal:w_DiurnalBin7_xaxis
+	Wave w_DiurnalBin8_xaxis = root:Diurnal:w_DiurnalBin8_xaxis
+	Wave w_DiurnalBin9_xaxis = root:Diurnal:w_DiurnalBin9_xaxis
+	Wave w_DiurnalBin10_xaxis = root:Diurnal:w_DiurnalBin10_xaxis
+	Wave w_DiurnalBin11_xaxis = root:Diurnal:w_DiurnalBin11_xaxis
+	Wave w_DiurnalBin12_xaxis = root:Diurnal:w_DiurnalBin12_xaxis
+	Wave w_DiurnalBin13_xaxis = root:Diurnal:w_DiurnalBin13_xaxis
+	Wave w_DiurnalBin14_xaxis = root:Diurnal:w_DiurnalBin14_xaxis
+	Wave w_DiurnalBin15_xaxis = root:Diurnal:w_DiurnalBin15_xaxis
+	Wave w_DiurnalBin16_xaxis = root:Diurnal:w_DiurnalBin16_xaxis
+	Wave w_DiurnalBin17_xaxis = root:Diurnal:w_DiurnalBin17_xaxis
+	Wave w_DiurnalBin18_xaxis = root:Diurnal:w_DiurnalBin18_xaxis
+	Wave w_DiurnalBin19_xaxis = root:Diurnal:w_DiurnalBin19_xaxis
+	Wave w_DiurnalBin20_xaxis = root:Diurnal:w_DiurnalBin20_xaxis
+	Wave w_DiurnalBin21_xaxis = root:Diurnal:w_DiurnalBin21_xaxis
+	Wave w_DiurnalBin22_xaxis = root:Diurnal:w_DiurnalBin22_xaxis
+	Wave w_DiurnalBin23_xaxis = root:Diurnal:w_DiurnalBin23_xaxis
+	Wave w_DiurnalBin24_xaxis = root:Diurnal:w_DiurnalBin24_xaxis
+	
+	Display/K=1 w_DiurnalMean vs w_DiurnalBinCenters
+	AppendToGraph w_DiurnalBin1_1090 vs w_DiurnalBin1_xaxis
+	AppendToGraph w_DiurnalBin2_1090 vs w_DiurnalBin2_xaxis
+	AppendToGraph w_DiurnalBin3_1090 vs w_DiurnalBin3_xaxis
+	AppendToGraph w_DiurnalBin4_1090 vs w_DiurnalBin4_xaxis
+	AppendToGraph w_DiurnalBin5_1090 vs w_DiurnalBin5_xaxis
+	AppendToGraph w_DiurnalBin6_1090 vs w_DiurnalBin6_xaxis
+	AppendToGraph w_DiurnalBin7_1090 vs w_DiurnalBin7_xaxis
+	AppendToGraph w_DiurnalBin8_1090 vs w_DiurnalBin8_xaxis
+	AppendToGraph w_DiurnalBin9_1090 vs w_DiurnalBin9_xaxis
+	AppendToGraph w_DiurnalBin10_1090 vs w_DiurnalBin10_xaxis
+	AppendToGraph w_DiurnalBin11_1090 vs w_DiurnalBin11_xaxis
+	AppendToGraph w_DiurnalBin12_1090 vs w_DiurnalBin12_xaxis
+	AppendToGraph w_DiurnalBin13_1090 vs w_DiurnalBin13_xaxis
+	AppendToGraph w_DiurnalBin14_1090 vs w_DiurnalBin14_xaxis
+	AppendToGraph w_DiurnalBin15_1090 vs w_DiurnalBin15_xaxis
+	AppendToGraph w_DiurnalBin16_1090 vs w_DiurnalBin16_xaxis	
+	AppendToGraph w_DiurnalBin17_1090 vs w_DiurnalBin17_xaxis
+	AppendToGraph w_DiurnalBin18_1090 vs w_DiurnalBin18_xaxis
+	AppendToGraph w_DiurnalBin19_1090 vs w_DiurnalBin19_xaxis
+	AppendToGraph w_DiurnalBin20_1090 vs w_DiurnalBin20_xaxis
+	AppendToGraph w_DiurnalBin21_1090 vs w_DiurnalBin21_xaxis
+	AppendToGraph w_DiurnalBin22_1090 vs w_DiurnalBin22_xaxis
+	AppendToGraph w_DiurnalBin23_1090 vs w_DiurnalBin23_xaxis
+	AppendToGraph w_DiurnalBin24_1090 vs w_DiurnalBin24_xaxis
+
+	SetDataFolder dfr_current
 
 End
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//	Get hourly waves for diurnal plot.
+//	Get hourly waves for diurnal plot. Each diurnal bin wave contains all the
+//	concentration measurements that occurred within that hourly bin.
 Function HKang_GetHourlyWaves(w_conc, w_time)
 	Wave w_conc, w_time
 
 	Variable v_binMax, v_binMin
+	Variable v_hourMinute
 	Variable iloop, jloop
+	Variable v_year, v_month, v_day
 	String str_waveTemp
 
-	// Make new data folder to store these waves.
-	NewDataFolder/O/S getdatafolderDFR():Diurnal
-
 	// Make time bins.
-	Make/O/D/N=25 w_DiurnalBins1hr = NaN
+	Make/O/D/N=24 w_DiurnalBins1hr = NaN
 
 	For(iloop = 0; iloop < numpnts(w_DiurnalBins1hr); iloop += 1)
 		w_DiurnalBins1hr[iloop] = iloop
@@ -74,17 +172,21 @@ Function HKang_GetHourlyWaves(w_conc, w_time)
 	Make/O/D/N=0 w_DiurnalBin24
 
 	// Fill the output waves. Start with each time bin.
-	For(iloop = 0; iloop < numpnts(w_DiurnalBins1hr); iloop += 1)
-		v_binMax = w_DiurnalBins1hr[iloop + 1]
-		v_binMin = w_DiurnalBins1hr[iloop]
-		
+	For(iloop = 1; iloop < numpnts(w_DiurnalBins1hr); iloop += 1)
+		v_binMax = w_DiurnalBins1hr[iloop] * 3600
+		v_binMin = w_DiurnalBins1hr[iloop - 1] * 3600
+
+		str_waveTemp = "w_DiurnalBin" + num2str(iloop)
+
+		Wave w_binWaveRef = root:Diurnal:$str_waveTemp
+
 		// Go through w_time and find points.
 		For(jloop = 0; jloop < numpnts(w_time); jloop += 1)
-			If(w_time[jloop] > v_binMin && w_time[jloop] <= v_binMax && numtype(w_conc[jloop]) == 0)
-				str_waveTemp = "w_DiurnalBin" + num2str(iloop + 1)
+			sscanf secs2date(w_time[jloop], -2), "%i-%i-%i", v_year, v_month, v_day
 
-				Wave w_binWaveRef = $str_waveTemp
+			v_hourMinute = w_time[jloop] - date2secs(v_year, v_month, v_day)
 
+			If(v_hourMinute > v_binMin && v_hourMinute <= v_binMax && numtype(w_conc[jloop]) == 0)
 				InsertPoints/M=0 numpnts(w_binWaveRef), 1, w_binWaveRef
 
 				w_binWaveRef[numpnts(w_binWaveRef) - 1] = w_conc[jloop]
@@ -102,13 +204,29 @@ Function HKang_GetHourlyStats()
 	Variable iloop, jloop
 	String str_waveTemp0, str_waveTemp1
 
-	SetDataFolder getdatafolderDFR():Diurnal
-
 	// Center of those time bins for graph x-axis.
 	Make/O/D/N=24 w_DiurnalBinCenters = NaN
 
 	For(iloop = 0; iloop < numpnts(w_DiurnalBinCenters); iloop += 1)
 		w_DiurnalBinCenters[iloop] = 0.5 + iloop
+	EndFor
+
+	// Make x-axis wave for each time bin.
+	For(iloop = 0; iloop < 25; iloop += 1)
+		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
+		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop + 1) + "_xaxis"
+	
+		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
+
+		Duplicate/O w_binWaveRef0, $str_waveTemp1		
+		
+		Wave w_binWaveRef1 = root:Diurnal:$str_waveTemp1
+
+		w_binWaveRef1 = NaN
+	
+		For(jloop = 0; jloop < numpnts(w_binWaveRef1); jloop += 1)
+			w_binWaveRef1[jloop] = w_DiurnalBinCenters[iloop] + enoise(0.2)
+		EndFor
 	EndFor
 
 	// Waves of statistics for concentration values in each time bin.
@@ -124,7 +242,7 @@ Function HKang_GetHourlyStats()
 	For(iloop = 0; iloop < 25; iloop += 1)
 		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
 
-		Wave w_binWaveRef0 = $str_waveTemp0
+		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
 
 		Wavestats/Q w_binWaveRef0
 		StatsQuantiles/Q w_binWaveRef0
@@ -141,10 +259,11 @@ Function HKang_GetHourlyStats()
 		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
 		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop + 1) + "_1090"
 
-		Wave w_binWaveRef0 = $str_waveTemp0
-		Wave w_binWaveRef1 = $str_waveTemp1
+		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
 
-		Duplicate/O w_binWaveRef0, w_binWaveRef1
+		Duplicate/O w_binWaveRef0, $str_waveTemp1
+
+		Wave w_binWaveRef1 = root:Diurnal:$str_waveTemp1
 
 		Sort w_binWaveRef1, w_binWaveRef1
 
