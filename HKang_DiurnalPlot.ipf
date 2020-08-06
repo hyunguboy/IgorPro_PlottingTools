@@ -3,8 +3,9 @@
 
 //	2020 Hyungu Kang, www.hazykinetics.com, hyunguboy@gmail.com
 //
-//	Version 1.1 (Released 2020-06-30)
-//	1.	Added z-axis color scales for to clarify the 
+//	Version 1.1 (Released 2020-08-07)
+//	1.	No longer compatible with Igor Pro 6 as transparency has been
+//		incorporated into the figures.
 //	2.	Changed code formatting for consistency.
 //
 //	Version 1.0 (Released 2020-01-31)
@@ -96,30 +97,30 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	Wave w_DiurnalBin24_xaxis = root:Diurnal:w_DiurnalBin24_xaxis
 	
 	Display/K=1 w_DiurnalMean vs w_DiurnalBinCenters
-	AppendToGraph w_DiurnalBin1_1090 vs w_DiurnalBin1_xaxis
-	AppendToGraph w_DiurnalBin2_1090 vs w_DiurnalBin2_xaxis
-	AppendToGraph w_DiurnalBin3_1090 vs w_DiurnalBin3_xaxis
-	AppendToGraph w_DiurnalBin4_1090 vs w_DiurnalBin4_xaxis
-	AppendToGraph w_DiurnalBin5_1090 vs w_DiurnalBin5_xaxis
-	AppendToGraph w_DiurnalBin6_1090 vs w_DiurnalBin6_xaxis
-	AppendToGraph w_DiurnalBin7_1090 vs w_DiurnalBin7_xaxis
-	AppendToGraph w_DiurnalBin8_1090 vs w_DiurnalBin8_xaxis
-	AppendToGraph w_DiurnalBin9_1090 vs w_DiurnalBin9_xaxis
-	AppendToGraph w_DiurnalBin10_1090 vs w_DiurnalBin10_xaxis
-	AppendToGraph w_DiurnalBin11_1090 vs w_DiurnalBin11_xaxis
-	AppendToGraph w_DiurnalBin12_1090 vs w_DiurnalBin12_xaxis
-	AppendToGraph w_DiurnalBin13_1090 vs w_DiurnalBin13_xaxis
-	AppendToGraph w_DiurnalBin14_1090 vs w_DiurnalBin14_xaxis
-	AppendToGraph w_DiurnalBin15_1090 vs w_DiurnalBin15_xaxis
-	AppendToGraph w_DiurnalBin16_1090 vs w_DiurnalBin16_xaxis	
-	AppendToGraph w_DiurnalBin17_1090 vs w_DiurnalBin17_xaxis
-	AppendToGraph w_DiurnalBin18_1090 vs w_DiurnalBin18_xaxis
-	AppendToGraph w_DiurnalBin19_1090 vs w_DiurnalBin19_xaxis
-	AppendToGraph w_DiurnalBin20_1090 vs w_DiurnalBin20_xaxis
-	AppendToGraph w_DiurnalBin21_1090 vs w_DiurnalBin21_xaxis
-	AppendToGraph w_DiurnalBin22_1090 vs w_DiurnalBin22_xaxis
-	AppendToGraph w_DiurnalBin23_1090 vs w_DiurnalBin23_xaxis
-	AppendToGraph w_DiurnalBin24_1090 vs w_DiurnalBin24_xaxis
+	AppendToGraph w_DiurnalBin1_1090 vs w_DiurnalBin1_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin2_1090 vs w_DiurnalBin2_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin3_1090 vs w_DiurnalBin3_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin4_1090 vs w_DiurnalBin4_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin5_1090 vs w_DiurnalBin5_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin6_1090 vs w_DiurnalBin6_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin7_1090 vs w_DiurnalBin7_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin8_1090 vs w_DiurnalBin8_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin9_1090 vs w_DiurnalBin9_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin10_1090 vs w_DiurnalBin10_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin11_1090 vs w_DiurnalBin11_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin12_1090 vs w_DiurnalBin12_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin13_1090 vs w_DiurnalBin13_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin14_1090 vs w_DiurnalBin14_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin15_1090 vs w_DiurnalBin15_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin16_1090 vs w_DiurnalBin16_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin17_1090 vs w_DiurnalBin17_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin18_1090 vs w_DiurnalBin18_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin19_1090 vs w_DiurnalBin19_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin20_1090 vs w_DiurnalBin20_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin21_1090 vs w_DiurnalBin21_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin22_1090 vs w_DiurnalBin22_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin23_1090 vs w_DiurnalBin23_xaxis; DelayUpdate
+	AppendToGraph w_DiurnalBin24_1090 vs w_DiurnalBin24_xaxis; DelayUpdate
 
 	SetDataFolder dfr_current
 
@@ -212,13 +213,13 @@ Function HKang_GetHourlyStats()
 	EndFor
 
 	// Make x-axis wave for each time bin.
-	For(iloop = 0; iloop < 25; iloop += 1)
+	For(iloop = 0; iloop < 24; iloop += 1)
 		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
 		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop + 1) + "_xaxis"
 	
 		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
 
-		Duplicate/O w_binWaveRef0, $str_waveTemp1		
+		Duplicate/O w_binWaveRef0, $str_waveTemp1
 		
 		Wave w_binWaveRef1 = root:Diurnal:$str_waveTemp1
 
@@ -239,7 +240,7 @@ Function HKang_GetHourlyStats()
 	Make/O/D/N=24 w_Diurnal10p = NaN
 
 	// Get statistics for diurnal plot.
-	For(iloop = 0; iloop < 25; iloop += 1)
+	For(iloop = 0; iloop < 24; iloop += 1)
 		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
 
 		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
@@ -255,7 +256,7 @@ Function HKang_GetHourlyStats()
 	EndFor
 
 	// Get 10 and 90 % points removed waves to be displayed on the diurnal plot.
-	For(iloop = 0; iloop < 25; iloop += 1)
+	For(iloop = 0; iloop < 24; iloop += 1)
 		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
 		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop + 1) + "_1090"
 
