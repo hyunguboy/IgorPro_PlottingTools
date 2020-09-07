@@ -46,6 +46,7 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	Wave w_Diurnal25p = root:Diurnal:w_Diurnal25p
 	Wave w_Diurnal10p = root:Diurnal:w_Diurnal10p
 
+	Wave w_DiurnalBin0_1090 = root:Diurnal:w_DiurnalBin0_1090
 	Wave w_DiurnalBin1_1090 = root:Diurnal:w_DiurnalBin1_1090
 	Wave w_DiurnalBin2_1090 = root:Diurnal:w_DiurnalBin2_1090
 	Wave w_DiurnalBin3_1090 = root:Diurnal:w_DiurnalBin3_1090
@@ -69,8 +70,8 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	Wave w_DiurnalBin21_1090 = root:Diurnal:w_DiurnalBin21_1090
 	Wave w_DiurnalBin22_1090 = root:Diurnal:w_DiurnalBin22_1090
 	Wave w_DiurnalBin23_1090 = root:Diurnal:w_DiurnalBin23_1090
-	Wave w_DiurnalBin24_1090 = root:Diurnal:w_DiurnalBin24_1090
 
+	Wave w_DiurnalBin0_xaxis = root:Diurnal:w_DiurnalBin0_xaxis
 	Wave w_DiurnalBin1_xaxis = root:Diurnal:w_DiurnalBin1_xaxis
 	Wave w_DiurnalBin2_xaxis = root:Diurnal:w_DiurnalBin2_xaxis
 	Wave w_DiurnalBin3_xaxis = root:Diurnal:w_DiurnalBin3_xaxis
@@ -94,9 +95,9 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	Wave w_DiurnalBin21_xaxis = root:Diurnal:w_DiurnalBin21_xaxis
 	Wave w_DiurnalBin22_xaxis = root:Diurnal:w_DiurnalBin22_xaxis
 	Wave w_DiurnalBin23_xaxis = root:Diurnal:w_DiurnalBin23_xaxis
-	Wave w_DiurnalBin24_xaxis = root:Diurnal:w_DiurnalBin24_xaxis
 	
 	Display/K=1 w_DiurnalMean vs w_DiurnalBinCenters
+	AppendToGraph w_DiurnalBin0_1090 vs w_DiurnalBin0_xaxis; DelayUpdate
 	AppendToGraph w_DiurnalBin1_1090 vs w_DiurnalBin1_xaxis; DelayUpdate
 	AppendToGraph w_DiurnalBin2_1090 vs w_DiurnalBin2_xaxis; DelayUpdate
 	AppendToGraph w_DiurnalBin3_1090 vs w_DiurnalBin3_xaxis; DelayUpdate
@@ -120,7 +121,6 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	AppendToGraph w_DiurnalBin21_1090 vs w_DiurnalBin21_xaxis; DelayUpdate
 	AppendToGraph w_DiurnalBin22_1090 vs w_DiurnalBin22_xaxis; DelayUpdate
 	AppendToGraph w_DiurnalBin23_1090 vs w_DiurnalBin23_xaxis; DelayUpdate
-	AppendToGraph w_DiurnalBin24_1090 vs w_DiurnalBin24_xaxis; DelayUpdate
 
 	SetDataFolder dfr_current
 
@@ -147,6 +147,7 @@ Function HKang_GetHourlyWaves(w_conc, w_time)
 	EndFor
 
 	// Waves of concentrations of each time bin.
+	Make/O/D/N=0 w_DiurnalBin0
 	Make/O/D/N=0 w_DiurnalBin1
 	Make/O/D/N=0 w_DiurnalBin2
 	Make/O/D/N=0 w_DiurnalBin3
@@ -170,12 +171,11 @@ Function HKang_GetHourlyWaves(w_conc, w_time)
 	Make/O/D/N=0 w_DiurnalBin21
 	Make/O/D/N=0 w_DiurnalBin22
 	Make/O/D/N=0 w_DiurnalBin23
-	Make/O/D/N=0 w_DiurnalBin24
 
 	// Fill the output waves. Start with each time bin.
-	For(iloop = 1; iloop < numpnts(w_DiurnalBins1hr); iloop += 1)
-		v_binMax = w_DiurnalBins1hr[iloop] * 3600
-		v_binMin = w_DiurnalBins1hr[iloop - 1] * 3600
+	For(iloop = 0; iloop < numpnts(w_DiurnalBins1hr); iloop += 1)
+		v_binMin = iloop * 3600
+		v_binMax = (iloop + 1) * 3600
 
 		str_waveTemp = "w_DiurnalBin" + num2str(iloop)
 
@@ -214,8 +214,8 @@ Function HKang_GetHourlyStats()
 
 	// Make x-axis wave for each time bin.
 	For(iloop = 0; iloop < 24; iloop += 1)
-		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
-		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop + 1) + "_xaxis"
+		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop)
+		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop) + "_xaxis"
 	
 		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
 
@@ -241,7 +241,7 @@ Function HKang_GetHourlyStats()
 
 	// Get statistics for diurnal plot.
 	For(iloop = 0; iloop < 24; iloop += 1)
-		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
+		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop)
 
 		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
 
@@ -257,8 +257,8 @@ Function HKang_GetHourlyStats()
 
 	// Get 10 and 90 % points removed waves to be displayed on the diurnal plot.
 	For(iloop = 0; iloop < 24; iloop += 1)
-		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop + 1)
-		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop + 1) + "_1090"
+		str_waveTemp0 = "w_DiurnalBin" + num2str(iloop)
+		str_waveTemp1 = "w_DiurnalBin" + num2str(iloop) + "_1090"
 
 		Wave w_binWaveRef0 = root:Diurnal:$str_waveTemp0
 
