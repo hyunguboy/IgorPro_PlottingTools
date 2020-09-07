@@ -122,6 +122,12 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	AppendToGraph w_DiurnalBin22_1090 vs w_DiurnalBin22_xaxis; DelayUpdate
 	AppendToGraph w_DiurnalBin23_1090 vs w_DiurnalBin23_xaxis; DelayUpdate
 
+	SetAxis bottom 0,24
+	ModifyGraph nticks(bottom)=24
+	ModifyGraph manTick(bottom)={0,1,0,0}, manMinor(bottom)={0,0}
+	ModifyGraph mode(w_DiurnalMean)=4, mrkThick(w_DiurnalMean)=2
+	ModifyGraph msize(w_DiurnalMean)=2, lsize(w_DiurnalMean)=2
+
 	SetDataFolder dfr_current
 
 End
