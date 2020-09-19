@@ -18,3 +18,5 @@ Takes data and makes a diurnal plot.
 Displays a scatterplot between 2 time series waves. Only displays the points where the times match between the 2 waves.
 
 ## HKang_GetMatchedTimes.ipf
+
+Gets time waves to match.
