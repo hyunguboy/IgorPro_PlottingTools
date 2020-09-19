@@ -13,10 +13,6 @@ Ex) Takes a measurement wave in 5 minute intervals and converts it into an hourl
 
 Takes data and makes a diurnal plot.
 
-## HKang_HysplitQuadrants.ipf
-
-Contains functions used for quadrant analysis. See code for details.
-
 ## HKang_MatchedTimeScatterPlot.ipf
 
 Displays a scatterplot between 2 time series waves. Only displays the points where the times match between the 2 waves.
