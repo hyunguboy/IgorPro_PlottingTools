@@ -21,8 +21,8 @@
 
 //	w_measTimeY, w_measY: put on the y-axis.
 //	w_measTimeX, w_measX: put on the x-axis.
-Function HKang_MatchedTimeScatterPlot(w_measTimeY, w_measY, w_measTimeX, w_measX)
-	Wave w_measTimeY, w_measY, w_measTimeX, w_measX
+Function HKang_MatchedTimeScatterPlot(w_measY, w_measTimeY, w_measX, w_measTimeX)
+	Wave w_measY, w_measTimeY, w_measX, w_measTimeX
 
 	Variable v_timeMatched
 	Variable iloop, jloop
