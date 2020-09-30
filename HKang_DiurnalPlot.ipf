@@ -35,10 +35,10 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	If(dataFolderExists("root:DiurnalPlot") != 1)
 		NewDataFolder/O root:DiurnalPlot
 		NewDataFolder/O root:DiurnalPlot:StatisticsWaves
-		NewDataFolder/O/S root:DiurnalPlot:PlotWaves
+		NewDataFolder/O root:DiurnalPlot:PlotWaves
 	ElseIf(dataFolderExists("root:DiurnalPlot:FigureWaves") != 1)
 		NewDataFolder/O root:DiurnalPlot:StatisticsWaves
-		NewDataFolder/O/S root:DiurnalPlot:PlotWaves
+		NewDataFolder/O root:DiurnalPlot:PlotWaves
 	EndIf
 
 	HKang_GetHourlyWaves(w_conc, w_time)
@@ -63,55 +63,55 @@ Function HKang_DisplayDiurnalPlot(w_conc, w_time)
 	Wave w_Diurnal10p = root:DiurnalPlot:StatisticsWaves:w_Diurnal10p
 
 	// Call waves with points to be displayed on the diurnal plot.
-	Wave w_DiurnalBin0_1090 = root:DiurnalPlot:w_DiurnalBin0_1090
-	Wave w_DiurnalBin1_1090 = root:DiurnalPlot:w_DiurnalBin1_1090
-	Wave w_DiurnalBin2_1090 = root:DiurnalPlot:w_DiurnalBin2_1090
-	Wave w_DiurnalBin3_1090 = root:DiurnalPlot:w_DiurnalBin3_1090
-	Wave w_DiurnalBin4_1090 = root:DiurnalPlot:w_DiurnalBin4_1090
-	Wave w_DiurnalBin5_1090 = root:DiurnalPlot:w_DiurnalBin5_1090
-	Wave w_DiurnalBin6_1090 = root:DiurnalPlot:w_DiurnalBin6_1090
-	Wave w_DiurnalBin7_1090 = root:DiurnalPlot:w_DiurnalBin7_1090
-	Wave w_DiurnalBin8_1090 = root:DiurnalPlot:w_DiurnalBin8_1090
-	Wave w_DiurnalBin9_1090 = root:DiurnalPlot:w_DiurnalBin9_1090
-	Wave w_DiurnalBin10_1090 = root:DiurnalPlot:w_DiurnalBin10_1090
-	Wave w_DiurnalBin11_1090 = root:DiurnalPlot:w_DiurnalBin11_1090
-	Wave w_DiurnalBin12_1090 = root:DiurnalPlot:w_DiurnalBin12_1090
-	Wave w_DiurnalBin13_1090 = root:DiurnalPlot:w_DiurnalBin13_1090
-	Wave w_DiurnalBin14_1090 = root:DiurnalPlot:w_DiurnalBin14_1090
-	Wave w_DiurnalBin15_1090 = root:DiurnalPlot:w_DiurnalBin15_1090
-	Wave w_DiurnalBin16_1090 = root:DiurnalPlot:w_DiurnalBin16_1090
-	Wave w_DiurnalBin17_1090 = root:DiurnalPlot:w_DiurnalBin17_1090
-	Wave w_DiurnalBin18_1090 = root:DiurnalPlot:w_DiurnalBin18_1090
-	Wave w_DiurnalBin19_1090 = root:DiurnalPlot:w_DiurnalBin19_1090
-	Wave w_DiurnalBin20_1090 = root:DiurnalPlot:w_DiurnalBin20_1090
-	Wave w_DiurnalBin21_1090 = root:DiurnalPlot:w_DiurnalBin21_1090
-	Wave w_DiurnalBin22_1090 = root:DiurnalPlot:w_DiurnalBin22_1090
-	Wave w_DiurnalBin23_1090 = root:DiurnalPlot:w_DiurnalBin23_1090
+	Wave w_DiurnalBin0_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin0_1090
+	Wave w_DiurnalBin1_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin1_1090
+	Wave w_DiurnalBin2_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin2_1090
+	Wave w_DiurnalBin3_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin3_1090
+	Wave w_DiurnalBin4_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin4_1090
+	Wave w_DiurnalBin5_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin5_1090
+	Wave w_DiurnalBin6_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin6_1090
+	Wave w_DiurnalBin7_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin7_1090
+	Wave w_DiurnalBin8_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin8_1090
+	Wave w_DiurnalBin9_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin9_1090
+	Wave w_DiurnalBin10_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin10_1090
+	Wave w_DiurnalBin11_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin11_1090
+	Wave w_DiurnalBin12_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin12_1090
+	Wave w_DiurnalBin13_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin13_1090
+	Wave w_DiurnalBin14_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin14_1090
+	Wave w_DiurnalBin15_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin15_1090
+	Wave w_DiurnalBin16_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin16_1090
+	Wave w_DiurnalBin17_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin17_1090
+	Wave w_DiurnalBin18_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin18_1090
+	Wave w_DiurnalBin19_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin19_1090
+	Wave w_DiurnalBin20_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin20_1090
+	Wave w_DiurnalBin21_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin21_1090
+	Wave w_DiurnalBin22_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin22_1090
+	Wave w_DiurnalBin23_1090 = root:DiurnalPlot:PlotWaves:w_DiurnalBin23_1090
 
-	Wave w_DiurnalBin0_xaxis = root:DiurnalPlot:w_DiurnalBin0_xaxis
-	Wave w_DiurnalBin1_xaxis = root:DiurnalPlot:w_DiurnalBin1_xaxis
-	Wave w_DiurnalBin2_xaxis = root:DiurnalPlot:w_DiurnalBin2_xaxis
-	Wave w_DiurnalBin3_xaxis = root:DiurnalPlot:w_DiurnalBin3_xaxis
-	Wave w_DiurnalBin4_xaxis = root:DiurnalPlot:w_DiurnalBin4_xaxis
-	Wave w_DiurnalBin5_xaxis = root:DiurnalPlot:w_DiurnalBin5_xaxis
-	Wave w_DiurnalBin6_xaxis = root:DiurnalPlot:w_DiurnalBin6_xaxis
-	Wave w_DiurnalBin7_xaxis = root:DiurnalPlot:w_DiurnalBin7_xaxis
-	Wave w_DiurnalBin8_xaxis = root:DiurnalPlot:w_DiurnalBin8_xaxis
-	Wave w_DiurnalBin9_xaxis = root:DiurnalPlot:w_DiurnalBin9_xaxis
-	Wave w_DiurnalBin10_xaxis = root:DiurnalPlot:w_DiurnalBin10_xaxis
-	Wave w_DiurnalBin11_xaxis = root:DiurnalPlot:w_DiurnalBin11_xaxis
-	Wave w_DiurnalBin12_xaxis = root:DiurnalPlot:w_DiurnalBin12_xaxis
-	Wave w_DiurnalBin13_xaxis = root:DiurnalPlot:w_DiurnalBin13_xaxis
-	Wave w_DiurnalBin14_xaxis = root:DiurnalPlot:w_DiurnalBin14_xaxis
-	Wave w_DiurnalBin15_xaxis = root:DiurnalPlot:w_DiurnalBin15_xaxis
-	Wave w_DiurnalBin16_xaxis = root:DiurnalPlot:w_DiurnalBin16_xaxis
-	Wave w_DiurnalBin17_xaxis = root:DiurnalPlot:w_DiurnalBin17_xaxis
-	Wave w_DiurnalBin18_xaxis = root:DiurnalPlot:w_DiurnalBin18_xaxis
-	Wave w_DiurnalBin19_xaxis = root:DiurnalPlot:w_DiurnalBin19_xaxis
-	Wave w_DiurnalBin20_xaxis = root:DiurnalPlot:w_DiurnalBin20_xaxis
-	Wave w_DiurnalBin21_xaxis = root:DiurnalPlot:w_DiurnalBin21_xaxis
-	Wave w_DiurnalBin22_xaxis = root:DiurnalPlot:w_DiurnalBin22_xaxis
-	Wave w_DiurnalBin23_xaxis = root:DiurnalPlot:w_DiurnalBin23_xaxis
+	Wave w_DiurnalBin0_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin0_xaxis
+	Wave w_DiurnalBin1_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin1_xaxis
+	Wave w_DiurnalBin2_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin2_xaxis
+	Wave w_DiurnalBin3_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin3_xaxis
+	Wave w_DiurnalBin4_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin4_xaxis
+	Wave w_DiurnalBin5_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin5_xaxis
+	Wave w_DiurnalBin6_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin6_xaxis
+	Wave w_DiurnalBin7_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin7_xaxis
+	Wave w_DiurnalBin8_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin8_xaxis
+	Wave w_DiurnalBin9_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin9_xaxis
+	Wave w_DiurnalBin10_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin10_xaxis
+	Wave w_DiurnalBin11_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin11_xaxis
+	Wave w_DiurnalBin12_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin12_xaxis
+	Wave w_DiurnalBin13_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin13_xaxis
+	Wave w_DiurnalBin14_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin14_xaxis
+	Wave w_DiurnalBin15_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin15_xaxis
+	Wave w_DiurnalBin16_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin16_xaxis
+	Wave w_DiurnalBin17_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin17_xaxis
+	Wave w_DiurnalBin18_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin18_xaxis
+	Wave w_DiurnalBin19_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin19_xaxis
+	Wave w_DiurnalBin20_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin20_xaxis
+	Wave w_DiurnalBin21_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin21_xaxis
+	Wave w_DiurnalBin22_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin22_xaxis
+	Wave w_DiurnalBin23_xaxis = root:DiurnalPlot:PlotWaves:w_DiurnalBin23_xaxis
 	
 	// Display diurnal plot.
 	Display/K=1 w_DiurnalMean vs w_DiurnalBinCenters
