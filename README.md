@@ -13,6 +13,8 @@ Ex) Takes a measurement wave in 5 minute intervals and converts it into an hourl
 
 Takes data and makes a diurnal plot.
 
+## HKang_LinRegConfIntervals.ipf
+
 ## HKang_MatchedToHysplit.ipf
 
 ## HKang_MatchedTimeScatterPlot.ipf
