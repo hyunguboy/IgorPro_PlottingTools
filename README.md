@@ -17,7 +17,7 @@ Takes data and makes a diurnal plot.
 
 Displays confidence and prediction intervals for a 2 dimensional linear regression.
 
-## HKang_MatchedToHysplit.ipf
+## HKang_MatchToHysplit.ipf
 
 ## HKang_MatchedTimeScatterPlot.ipf
 
