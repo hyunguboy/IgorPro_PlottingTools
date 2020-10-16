@@ -19,6 +19,8 @@ Displays confidence and prediction intervals for a 2 dimensional linear regressi
 
 ## HKang_MatchToHysplit.ipf
 
+matches time series between hysplit clusters
+
 ## HKang_MatchedTimeScatterPlot.ipf
 
 Displays a scatterplot between 2 time series waves. Only displays the points where the times match between the 2 waves.
