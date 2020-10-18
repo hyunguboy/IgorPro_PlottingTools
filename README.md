@@ -11,7 +11,7 @@ Ex) Takes a measurement wave in 5 minute intervals and converts it into an hourl
 
 ## HKang_DiurnalPlot.ipf
 
-Takes data and makes a diurnal plot.
+Takes time series data and makes a diurnal plot.
 
 ## HKang_LinRegConfIntervals.ipf
 
@@ -19,7 +19,7 @@ Displays confidence and prediction intervals for a 2 dimensional linear regressi
 
 ## HKang_MatchToHysplit.ipf
 
-Matches time series between hysplit clusters.
+Matches a measurement time series to Hysplit cluster time series.
 
 ## HKang_MatchedTimeScatterPlot.ipf
 
