@@ -15,7 +15,7 @@ Takes time series data and makes a diurnal plot.
 
 ## HKang_LinRegConfIntervals.ipf
 
-Displays confidence and prediction intervals for a 2 dimensional linear regression.
+Displays confidence and prediction intervals for a 2 dimensional linear regression. Please see the Igor Pro help file for additional details.
 
 ## HKang_MatchToHysplit.ipf
 
