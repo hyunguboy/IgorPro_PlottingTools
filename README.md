@@ -11,7 +11,7 @@ Ex) Takes a measurement wave in 5 minute intervals and converts it into an hourl
 
 ## HKang_DiurnalPlot.ipf
 
-Takes time series data and makes a diurnal plot.
+Takes time series data and makes a diurnal plot. see inside
 
 ## HKang_LinRegConfIntervals.ipf
 
