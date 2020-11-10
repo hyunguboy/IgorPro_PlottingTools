@@ -1,7 +1,5 @@
 # IgorPro_PlottingTools
-Functions I use to make plots and more. See notes in file for information use. Examples to be uploaded, need waves to run.
-
-Most of these functions were written in Igor Pro 8. They may not be compatible with previous versions of Igor Pro, so use at your own discretion.
+Functions I use to make plots and more. See notes in file for information use. Examples to be uploaded, need waves to run. Most of these functions were written in Igor Pro 8. They may not be compatible with previous versions of Igor Pro, so use at your own discretion.
 
 ## HKang_AvgMatchToTime.ipf
 
