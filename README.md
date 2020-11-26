@@ -3,7 +3,7 @@ Functions I use to make plots and more. See notes in file for information use. E
 
 ## HKang_AvgMatchToTime.ipf
 
-This function averages a wave with a corresponding time wave into a shorter time series.
+This function averages a wave with a corresponding time wave into a shorter time series. 
 
 Ex) Takes a measurement wave in 5 minute intervals and converts it into an hourly interval wave by averaging.
 
