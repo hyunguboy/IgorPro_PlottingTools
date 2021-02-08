@@ -25,4 +25,4 @@ Displays a scatterplot between 2 time series waves. Only displays the points whe
 
 ## HKang_GetMatchedTimes.ipf
 
-Gets time waves to match.
+Gets time waves to match. 
